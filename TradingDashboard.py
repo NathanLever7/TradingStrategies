@@ -27,13 +27,13 @@ if selected_stock == 'VUSA (S&P 500)':
     # 4. Remove the specified columns
     data.drop(columns=['Average_Actual_Return_Positive', 'Average_Actual_Return_Negative'], inplace=True)
     
-    # 5. Rename a column and add a % sign to its values
+    # 5. Rename a column and format its values to 3 decimal places with a % sign
     data.rename(columns={'Average_Actual_Return_Positive_Daily': 'Actual Daily Return when Buying after Positive Prediction'}, inplace=True)
-    data['Actual Daily Return when Buying after Positive Prediction'] = data['Actual Daily Return when Buying after Positive Prediction'].astype(str) + '%'
-    
+    data['Actual Daily Return when Buying after Positive Prediction'] = data['Actual Daily Return when Buying after Positive Prediction'].str.replace('%', '').astype(float).round(3).astype(str) + '%'
+
     # 6. Do the equivalent for another column
     data.rename(columns={'Average_Actual_Return_Negative_Daily': 'Actual Daily Return when Buying after Negative Prediction'}, inplace=True)
-    data['Actual Daily Return when Buying after Negative Prediction'] = data['Actual Daily Return when Buying after Negative Prediction'].astype(str) + '%'
+    data['Actual Daily Return when Buying after Negative Prediction'] = data['Actual Daily Return when Buying after Negative Prediction'].str.replace('%', '').astype(float).round(3).astype(str) + '%'
     
     # 7. Rename two more columns
     data.rename(columns={'Capital_Positive': 'Capital following Positive Prediction Strategy', 
