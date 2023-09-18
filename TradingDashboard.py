@@ -8,7 +8,7 @@ st.title('Index Trading Strategies')
 st.subheader('Choosing Optimal Strategies for Each Security')
 
 # Add descriptive text under the subheading
-st.write('''When choosing our investments, we wish to run models on multiple different securities, judging their profitability over different time horizons. However, this is computationally expensive. In this section, we look at each security and define the optimal time horizon for the stock, and this is what we will use when running our models for investment suggestions each day.''')
+st.write('''When choosing our investments, we wish to run models on multiple different securities, judging their profitability over different time horizons. However, this is computationally expensive. In this section, we look at each security and define the optimal time horizon. This is what we will use when running our models for investment suggestions each day.''')
 st.write('''Each dataframe has information on the per day returns for each holding length strategy, and contrasts results when investing when predictions are positive, negative, and regardless of prediction. This shows the performance of our algorithm.''')
 st.write('''Each dataframe also has the overall capital when following an investment strategy that is as follows:''')
 st.write('''    1. Invest according to the strategy (whether predictions are positive, negative or irrespective of the prediction)''')
