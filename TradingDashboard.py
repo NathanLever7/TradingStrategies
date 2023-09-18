@@ -8,9 +8,8 @@ st.title('Index Trading Strategies')
 st.subheader('Choosing Optimal Strategies for Each Security')
 
 # Add descriptive text under the subheading
-st.write('When choosing our investments, we wish to run models on multiple different securities, judging their profitability over different time horizons. However, this is computationally expensive. In this section, we look at each security and define the optimal time horizon for the stock, and this is what we will use when running our models for investment suggestions each day.
-
-         Each dataframe has...')
+st.write('''When choosing our investments, we wish to run models on multiple different securities, judging their profitability over different time horizons. However, this is computationally expensive. In this section, we look at each security and define the optimal time horizon for the stock, and this is what we will use when running our models for investment suggestions each day.''')
+st.write('''Each dataframe has...''')
 
 # Create a dropdown menu with VUSA as an option
 selected_stock = st.selectbox('Select Stock:', ['VUSA (S&P 500)'])
