@@ -13,7 +13,7 @@ st.write('''Each dataframe has information on the per day returns for each holdi
 st.write('''Each dataframe also has the overall capital when following an investment strategy that is as follows:''')
 st.write('''    1. Our given starting capital is 100.''')
 st.write('''    2. Invest according to the strategy (whether predictions are positive, negative or irrespective of the prediction).''')
-st.write('''    3. We decide to invest a fixed amount for each respective strategy, which corresponds to (1/(Length of Holding Period))*100. This means for the 1 day strategy, it is an investment of 100, and a 10 day strategy has an investment of 10 each time. This is to ensure there is spare capacity for further investment.''')
+st.write('''    3. We decide to invest a fixed amount for each respective strategy, which corresponds to (1/(Length of Holding Period))*100. This means that the 1 day strategy has an investment of 100 each time, whilst the 10 day strategy has an investment of 10 each time. This is to ensure there is spare capacity for further investment, if required.''')
 st.write('''We gather the results of the different strategies, and use this to define an optimal approach.''')
 st.write('''NB: The data used begins from 01/01/2022, and the end date is defined for each security.''')
 
