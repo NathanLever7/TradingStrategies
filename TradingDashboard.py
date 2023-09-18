@@ -50,7 +50,7 @@ if selected_stock == 'VUSA (S&P 500)':
     data['Actual Daily Return when Buying after Positive Prediction'] = data['Actual Daily Return when Buying after Positive Prediction'].astype(float).round(3).astype(str) + '%'
 
     # 6. Do the equivalent for another column
-    data.rename(columns={'Average_Actual_Return_Negative_Daily': ''Daily Return with Negative Prediction Strategy'}, inplace=True)
+    data.rename(columns={'Average_Actual_Return_Negative_Daily': 'Daily Return with Negative Prediction Strategy'}, inplace=True)
     data['Actual Daily Return when Buying after Negative Prediction'] = data['Actual Daily Return when Buying after Negative Prediction'].astype(float).round(3).astype(str) + '%'
 
     # 7. Rename two more columns
