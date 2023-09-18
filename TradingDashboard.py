@@ -44,6 +44,10 @@ if selected_stock == 'VUSA (S&P 500)':
     
     # 9. Remove the Time_Taken column
     data.drop(columns=['Time_Taken'], inplace=True)
+
+    # Round all numerical values to 3 decimal places
+    for col in data.select_dtypes(include=['float64']).columns:
+        data[col] = data[col].round(3)
     
     # Print the modified DataFrame on the streamlit web page
     st.write(data)
