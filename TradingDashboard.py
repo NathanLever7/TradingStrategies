@@ -9,10 +9,21 @@ st.subheader('Choosing Optimal Strategies for Each Security')
 
 # Add descriptive text under the subheading
 st.write('''When choosing our investments, we wish to run models on multiple different securities, judging their profitability over different time horizons. However, this is computationally expensive. In this section, we look at each security and define the optimal time horizon for the stock, and this is what we will use when running our models for investment suggestions each day.''')
-st.write('''Each dataframe has...''')
+st.write('''Our strategy is simple: Invest when the positive profits are predicted.''')
+st.write('''Each dataframe has information on the per day returns for each holding length strategy, and contrasts results when investing when predictions are positive, negative, and regardless of prediction. This shows the performance of our algorithm.''')
+st.write('''Each dataframe also has the overall capital when following an investment strategy that is as follows:''')
+st.write('''    1. Invest according to the strategy (whether predictions are positive, negative or either.''')
+st.write('''    2. Our original size of capital is 100. We decide to invest a fixed amount for each respective strategy, which corresponds to (1/(Length of Holding Period))*100. This means for the 1 day strategy, it is an investment of 100, and a 10 day strategy has an investment of 10 each time. This is to ensure there is spare capacity for further investment.''')
+st.write('''We gather the results of the different strategies, and use this to define an optimal approach.''')
+st.write('''NB: The data used begins from 01/01/2022, and the end date is defined for each security.''')
+
+
+
+
+
 
 # Create a dropdown menu with VUSA as an option
-selected_stock = st.selectbox('Select Stock:', ['VUSA (S&P 500)'])
+selected_stock = st.selectbox('Select Security:', ['VUSA (S&P 500)'])
 
 if selected_stock == 'VUSA (S&P 500)':
   
@@ -22,7 +33,7 @@ if selected_stock == 'VUSA (S&P 500)':
 
     # 1. Rename the first column and update its values
     data.rename(columns={data.columns[0]: 'Days Holding Security'}, inplace=True)
-    data['Days Holding Security'] = range(1, 11)
+    data['Days Holding'] = range(1, 11)
     
     # 2. Remove the Average_RMSE column
     data.drop(columns=['Average_RMSE'], inplace=True)
