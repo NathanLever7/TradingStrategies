@@ -73,6 +73,7 @@ if selected_stock == 'VUSA (S&P 500)':
                                                            ('font-size', '10pt'), 
                                                            ('height', '40px')])])
     st.markdown(styled.to_html(), unsafe_allow_html=True)
+    
     st.markdown("<small>Description for VUSA (S&P 500)</small>", unsafe_allow_html=True)
 
 elif selected_stock == 'VUKE (FTSE 100)':
