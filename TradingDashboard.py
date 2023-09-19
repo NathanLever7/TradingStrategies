@@ -74,7 +74,7 @@ if selected_stock == 'VUSA (S&P 500)':
                                                            ('height', '40px')])])
     st.markdown(styled.to_html(), unsafe_allow_html=True)
     st.markdown("")
-    st.markdown("<small>The algorithm performs well with VUSA when investing on positive predictions, beating out the market rate.</small>", unsafe_allow_html=True)
+    st.markdown("<small>The algorithm performs well with VUSA when investing following positive predictions, beating out the market rate.</small>", unsafe_allow_html=True)
     st.markdown("<small>The best investment strategy appears to be holding for 7 days: It has the highest daily return and capital growth.</small>", unsafe_allow_html=True)
 
 elif selected_stock == 'VUKE (FTSE 100)':
@@ -88,7 +88,7 @@ elif selected_stock == 'VUKE (FTSE 100)':
                                                            ('height', '40px')])])
     st.markdown(styled.to_html(), unsafe_allow_html=True)
     st.markdown("")
-    st.markdown("<small>The algorithm performs well with VUSA when investing on positive predictions, beating out the market rate.</small>", unsafe_allow_html=True)
+    st.markdown("<small>The algorithm performs well with VUKE when investing following positive predictions, beating out the market rate.</small>", unsafe_allow_html=True)
     st.markdown("<small>The best investment strategy appears to be holding for 5 days: It has the highest daily return and capital growth. .</small>", unsafe_allow_html=True)
     st.markdown("Holding for 2 days might be seen as an alternative, safer option. It has a slightly lower return, but the MAE suggests predicitons are more accurate.")
 
@@ -96,14 +96,18 @@ elif selected_stock == 'VUKE (FTSE 100)':
 elif selected_stock == 'INRG (iShares Global Clean Energy)':
     csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/INRG_Metrics.csv'
     data = load_and_preprocess_data(csv_url)
-    styled = data.style.apply(lambda x: ['background: lightgreen' if x.name == 2 else '' for i in x], axis=1)\
+    styled = data.style.apply(lambda x: ['background: lightgreen' if x.name == 6 else '' for i in x], axis=1)\
              .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
              .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
                                                            ('text-align', 'center'), 
                                                            ('font-size', '10pt'), 
                                                            ('height', '40px')])])
     st.markdown(styled.to_html(), unsafe_allow_html=True)
-    st.markdown("<small>Description for INRG (iShares Global Clean Energy)</small>", unsafe_allow_html=True)
+    st.markdown("")
+    st.markdown("<small>The algorithm performs well with INRG when investing following positive predictions, beating out the market rate.</small>", unsafe_allow_html=True)
+    st.markdown("<small>The best investment strategy appears to be holding for 7 days.</small>", unsafe_allow_html=True)
+    st.markdown("<small>Holding for 9 days has a slightly higher return, the MAE is significantly higher, so it makes sense to go for the marginally less profitable option, with less risk. Of course, this depends on personal risk preferences.</small>", unsafe_allow_html=True)
+
 
 elif selected_stock == 'VUKG (FTSE 100 Growth)':
     csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKG_Metrics.csv'
