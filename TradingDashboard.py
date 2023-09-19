@@ -119,7 +119,7 @@ elif selected_stock == 'VUKG (FTSE 100 Growth)':
                                                            ('font-size', '10pt'), 
                                                            ('height', '40px')])])
     st.markdown(styled.to_html(), unsafe_allow_html=True)
-     st.markdown("")
+    st.markdown("")
     st.markdown("<small>The algorithm performs well with VUKG when investing following positive predictions, beating out the market rate.</small>", unsafe_allow_html=True)
     st.markdown("<small>The best investment strategy appears to be holding for 5 days. It has the highest daily return and capital growth.</small>", unsafe_allow_html=True)
     st.markdown("<small>Holding for 9 days has a slightly higher return, the MAE is significantly higher, so it makes sense to go for the marginally less profitable option, with less risk. Of course, this depends on personal risk preferences.</small>", unsafe_allow_html=True)
