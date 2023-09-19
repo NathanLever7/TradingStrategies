@@ -67,7 +67,7 @@ if selected_stock == 'VUSA (S&P 500)':
     csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUSA_Metrics.csv'
     data = load_and_preprocess_data(csv_url)
     st.write(data)
-    st.write("Description for VUSA (S&P 500)")
+    st.markdown("<small>Description for VUSA (S&P 500)</small>", unsafe_allow_html=True)
 
 elif selected_stock == 'VUKE (FTSE 100)':
     csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKE_Metrics.csv' # Replace with the actual URL for the INRG data file
