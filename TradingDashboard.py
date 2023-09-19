@@ -159,7 +159,7 @@ if optimal_strategies:
     result_df = result_df[['Security', 'Daily Return with Positive Prediction Strategy', 'Capital with Positive Prediction Strategy', 'Average MAE', 'Days Holding']]
     
     # Convert 'Daily Return with Positive Prediction Strategy' to float for sorting
-    result_df['Daily Return with Positive Prediction Strategy'] = result_df['Daily Return with Positive Prediction Strategy'].str.replace('%','').astype(float)
+    result_df.loc[:, 'Daily Return with Positive Prediction Strategy'] = result_df['Daily Return with Positive Prediction Strategy'].str.replace('%','').astype(float)
     
     # Sort the dataframe based on 'Daily Return with Positive Prediction Strategy' and reset the index
     result_df = result_df.sort_values(by='Daily Return with Positive Prediction Strategy', ascending=False).reset_index(drop=True)
@@ -181,7 +181,7 @@ if optimal_strategies:
     styled_result_df = style_optimal_table(result_df)
     
     # Display the styled dataframe in HTML
-    st.markdown(styled_result_df.render(), unsafe_allow_html=True)
+    st.markdown(styled_result_df.to_html(), unsafe_allow_html=True)
 
 
 
