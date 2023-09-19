@@ -64,34 +64,53 @@ def load_and_preprocess_data(csv_url):
 selected_stock = st.selectbox('Select Security:', ['VUSA (S&P 500)', 'VUKE (FTSE 100)', 'INRG (iShares Global Clean Energy)', 'VUKG (FTSE 100 Growth)'])
 
 if selected_stock == 'VUSA (S&P 500)':
-    st.markdown("<small>Description for VUSA (S&P 500)</small>", unsafe_allow_html=True)
     csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUSA_Metrics.csv'
     data = load_and_preprocess_data(csv_url)
-    
     styled = data.style.apply(lambda x: ['background: lightgreen' if x.name == 2 else '' for i in x], axis=1)\
              .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
              .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
                                                            ('text-align', 'center'), 
                                                            ('font-size', '10pt'), 
                                                            ('height', '40px')])])
-
     st.markdown(styled.to_html(), unsafe_allow_html=True)
+    st.markdown("<small>Description for VUSA (S&P 500)</small>", unsafe_allow_html=True)
 
 elif selected_stock == 'VUKE (FTSE 100)':
-    csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKE_Metrics.csv' # Replace with the actual URL for the INRG data file
+    csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKE_Metrics.csv'
     data = load_and_preprocess_data(csv_url)
-    st.write(data)
-    st.write("Description for FTSE 100")
+    styled = data.style.apply(lambda x: ['background: lightgreen' if x.name == 2 else '' for i in x], axis=1)\
+             .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
+             .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
+                                                           ('text-align', 'center'), 
+                                                           ('font-size', '10pt'), 
+                                                           ('height', '40px')])])
+    st.markdown(styled.to_html(), unsafe_allow_html=True)
+    st.markdown("<small>Description for FTSE 100</small>", unsafe_allow_html=True)
+
 elif selected_stock == 'INRG (iShares Global Clean Energy)':
-    csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/INRG_Metrics.csv' # Replace with the actual URL for the INRG data file
+    csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/INRG_Metrics.csv'
     data = load_and_preprocess_data(csv_url)
-    st.write(data)
-    st.write("Description for INRG (iShares Global Clean Energy)")
+    styled = data.style.apply(lambda x: ['background: lightgreen' if x.name == 2 else '' for i in x], axis=1)\
+             .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
+             .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
+                                                           ('text-align', 'center'), 
+                                                           ('font-size', '10pt'), 
+                                                           ('height', '40px')])])
+    st.markdown(styled.to_html(), unsafe_allow_html=True)
+    st.markdown("<small>Description for INRG (iShares Global Clean Energy)</small>", unsafe_allow_html=True)
+
 elif selected_stock == 'VUKG (FTSE 100 Growth)':
-    csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKG_Metrics.csv' # Replace with the actual URL for the VUKG data file
+    csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKG_Metrics.csv'
     data = load_and_preprocess_data(csv_url)
-    st.write(data)
-    st.write("Description for VUKG (FTSE 100)") # Add your description here
+    styled = data.style.apply(lambda x: ['background: lightgreen' if x.name == 2 else '' for i in x], axis=1)\
+             .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
+             .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
+                                                           ('text-align', 'center'), 
+                                                           ('font-size', '10pt'), 
+                                                           ('height', '40px')])])
+    st.markdown(styled.to_html(), unsafe_allow_html=True)
+    st.markdown("<small>Description for VUKG (FTSE 100)</small>", unsafe_allow_html=True)
+
 
 
 
