@@ -66,7 +66,7 @@ selected_stock = st.selectbox('Select Security:', ['VUSA (S&P 500)', 'VUKE (FTSE
 if selected_stock == 'VUSA (S&P 500)':
     csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUSA_Metrics.csv'
     data = load_and_preprocess_data(csv_url)
-    styled = data.style.apply(lambda x: ['background: lightgreen' if x.name == 2 else '' for i in x], axis=1)\
+    styled = data.style.apply(lambda x: ['background: lightgreen' if x.name == 6 else '' for i in x], axis=1)\
              .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
              .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
                                                            ('text-align', 'center'), 
