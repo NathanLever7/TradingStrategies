@@ -17,7 +17,12 @@ st.write('''    3. We decide to invest a fixed amount for each respective strate
 st.write('''We gather the results of the different strategies, and use this to define an optimal approach.''')
 st.write('''NB: The data used begins from 01/01/2022, and the end date is defined for each security.''')
 
+optimal_strategies = []
 
+def get_optimal_strategy(data, security_name):
+    optimal_row = data.iloc[[6]] if security_name != 'VUKE (FTSE 100)' and security_name != 'VUKG (FTSE 100 Growth)' else data.iloc[[4]]
+    optimal_row['Security'] = security_name
+    return optimal_row
 
 def load_and_preprocess_data(csv_url):
   data = pd.read_csv(csv_url)  
@@ -76,6 +81,7 @@ if selected_stock == 'VUSA (S&P 500)':
     st.markdown("")
     st.markdown("<small>The algorithm performs well with VUSA when investing following positive predictions, beating out the market rate.</small>", unsafe_allow_html=True)
     st.markdown("<small>The best investment strategy appears to be holding for 7 days: It has the highest daily return and capital growth.</small>", unsafe_allow_html=True)
+    optimal_strategies.append(get_optimal_strategy(data, 'VUSA (S&P 500)'))
 
 elif selected_stock == 'VUKE (FTSE 100)':
     csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKE_Metrics.csv'
@@ -91,6 +97,7 @@ elif selected_stock == 'VUKE (FTSE 100)':
     st.markdown("<small>The algorithm performs well with VUKE when investing following positive predictions, beating out the market rate.</small>", unsafe_allow_html=True)
     st.markdown("<small>The best investment strategy appears to be holding for 5 days: It has the highest daily return and capital growth. .</small>", unsafe_allow_html=True)
     st.markdown("Holding for 2 days might be seen as an alternative, safer option. It has a slightly lower return, but the MAE suggests predicitons are more accurate.")
+    optimal_strategies.append(get_optimal_strategy(data, 'VUKE (FTSE 100)'))
 
 
 elif selected_stock == 'INRG (iShares Global Clean Energy)':
@@ -107,6 +114,7 @@ elif selected_stock == 'INRG (iShares Global Clean Energy)':
     st.markdown("<small>The algorithm performs well with INRG when investing following positive predictions, beating out the market rate.</small>", unsafe_allow_html=True)
     st.markdown("<small>The best investment strategy appears to be holding for 7 days.</small>", unsafe_allow_html=True)
     st.markdown("<small>Holding for 9 days has a slightly higher return, the MAE is significantly higher, so it makes sense to go for the marginally less profitable option, with less risk. Of course, this depends on personal risk preferences.</small>", unsafe_allow_html=True)
+    optimal_strategies.append(get_optimal_strategy(data, 'INRG (iShares Global Clean Energy)'))
 
 
 elif selected_stock == 'VUKG (FTSE 100 Growth)':
@@ -123,9 +131,10 @@ elif selected_stock == 'VUKG (FTSE 100 Growth)':
     st.markdown("<small>The algorithm performs well with VUKG when investing following positive predictions, beating out the market rate.</small>", unsafe_allow_html=True)
     st.markdown("<small>The best investment strategy appears to be holding for 5 days. It has the highest daily return and capital growth.</small>", unsafe_allow_html=True)
     st.markdown("<small>Holding for 9 days has a slightly higher return, the MAE is significantly higher, so it makes sense to go for the marginally less profitable option, with less risk. Of course, this depends on personal risk preferences.</small>", unsafe_allow_html=True)
+    optimal_strategies.append(get_optimal_strategy(data, 'VUKG (FTSE 100 Growth)'))
 
-    st.markdown("")
-    st.markdown("")
+st.markdown("")
+st.markdown("")
 
 
 st.subheader('Choosing The Best Investment')
@@ -133,7 +142,23 @@ st.subheader('Choosing The Best Investment')
 st.markdown("<small>On any given day, the algorithm might suggest several investments. We need to decide which are the most profitable to target.</small>", unsafe_allow_html=True)
 st.markdown("<small>We will compare out previously identified optimal strategies for each security, and compile a ranking.</small>", unsafe_allow_html=True)
 
-
+if optimal_strategies:
+    result_df = pd.concat(optimal_strategies)
+    
+    # Reorder the columns
+    result_df = result_df[['Security', 'Daily Return with Positive Prediction Strategy', 'Capital with Positive Prediction Strategy', 'Average MAE', 'Days Holding']]
+    
+    # Convert 'Daily Return with Positive Prediction Strategy' to float for sorting
+    result_df['Daily Return with Positive Prediction Strategy'] = result_df['Daily Return with Positive Prediction Strategy'].str.replace('%','').astype(float)
+    
+    # Sort the dataframe based on 'Daily Return with Positive Prediction Strategy' and reset the index
+    result_df = result_df.sort_values(by='Daily Return with Positive Prediction Strategy', ascending=False).reset_index(drop=True)
+    
+    # Create the 'Priority' column
+    result_df['Priority'] = result_df.index + 1
+    
+    # Display the dataframe
+    st.write(result_df)
 
 
 
