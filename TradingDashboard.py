@@ -125,6 +125,8 @@ elif selected_stock == 'VUKG (FTSE 100 Growth)':
     st.markdown("<small>Holding for 9 days has a slightly higher return, the MAE is significantly higher, so it makes sense to go for the marginally less profitable option, with less risk. Of course, this depends on personal risk preferences.</small>", unsafe_allow_html=True)
 
     st.markdown("")
+    st.markdown("")
+
 
 st.subheader('Choosing The Best Investment')
 
