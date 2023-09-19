@@ -1,17 +1,6 @@
 import streamlit as st
 import pandas as pd
 
-def load_and_preprocess_data(csv_url):
-  
-
-
-
-
-
-
-
-
-
 # Set the title of the streamlit dashboard
 st.title('Index Trading Strategies')
 
@@ -30,58 +19,74 @@ st.write('''NB: The data used begins from 01/01/2022, and the end date is define
 
 
 
+def load_and_preprocess_data(csv_url):
+  data = pd.read_csv(csv_url)  
+  
+  # 1. Rename the first column and update its values
+  data.rename(columns={data.columns[0]: 'Days Holding'}, inplace=True)
+  data['Days Holding'] = range(1, 11)
+  
+  # 2. Remove the Average_RMSE column
+  data.drop(columns=['Average_RMSE'], inplace=True)
+  
+  # 3. Move the Average_MAE column to the end and rename it
+  average_mae = data.pop('Average_MAE')
+  data['Average MAE'] = average_mae
+  
+  # 4. Remove the specified columns
+  data.drop(columns=['Average_Actual_Return_Positive', 'Average_Actual_Return_Negative'], inplace=True)
+
+  # 5. Rename a column and round its values to 3 decimal places, then add a % sign
+  data.rename(columns={'Average_Actual_Return_Positive_Daily': 'Daily Return with Positive Prediction Strategy'}, inplace=True)
+  data['Daily Return with Positive Prediction Strategy'] = data['Daily Return with Positive Prediction Strategy'].astype(float).round(3).astype(str) + '%'
+
+  # 6. Do the equivalent for another column
+  data.rename(columns={'Average_Actual_Return_Negative_Daily': 'Daily Return with Negative Prediction Strategy'}, inplace=True)
+  data['Daily Return with Negative Prediction Strategy'] = data['Daily Return with Negative Prediction Strategy'].astype(float).round(3).astype(str) + '%'
+
+  # 7. Rename two more columns
+  data.rename(columns={'Capital_Positive': 'Capital with Positive Prediction Strategy', 
+                       'Capital_Negative': 'Capital with Negative Prediction Strategy'}, inplace=True)
+  
+  # 8. Rename another column
+  data.rename(columns={'Capital_Daily_Investment': 'Capital Investing Every Day'}, inplace=True)
+  
+  # 9. Remove the Time_Taken column
+  data.drop(columns=['Time_Taken'], inplace=True)
+
+  # 10. Round all numerical values to 3 decimal places
+  for col in data.select_dtypes(include=['float64']).columns:
+      data[col] = data[col].round(3)
 
 
+  return data
 
-# Create a dropdown menu with VUSA as an option
-selected_stock = st.selectbox('Select Security:', ['VUSA (S&P 500)'])
+selected_stock = st.selectbox('Select Security:', ['VUSA (S&P 500)', 'VUKE (FTSE 100)', 'INRG (iShares Global Clean Energy)', 'VUKG (FTSE 100 Growth)'])
 
 if selected_stock == 'VUSA (S&P 500)':
-  
-    # Load the CSV file from the GitHub repository (use the raw URL of the CSV file)
+    st.write("Description for VUSA (S&P 500)")
     csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUSA_Metrics.csv'
-    data = pd.read_csv(csv_url)
-
-    # 1. Rename the first column and update its values
-    data.rename(columns={data.columns[0]: 'Days Holding'}, inplace=True)
-    data['Days Holding'] = range(1, 11)
-    
-    # 2. Remove the Average_RMSE column
-    data.drop(columns=['Average_RMSE'], inplace=True)
-    
-    # 3. Move the Average_MAE column to the end and rename it
-    average_mae = data.pop('Average_MAE')
-    data['Average MAE'] = average_mae
-    
-    # 4. Remove the specified columns
-    data.drop(columns=['Average_Actual_Return_Positive', 'Average_Actual_Return_Negative'], inplace=True)
-
-    # 5. Rename a column and round its values to 3 decimal places, then add a % sign
-    data.rename(columns={'Average_Actual_Return_Positive_Daily': 'Daily Return with Positive Prediction Strategy'}, inplace=True)
-    data['Daily Return with Positive Prediction Strategy'] = data['Daily Return with Positive Prediction Strategy'].astype(float).round(3).astype(str) + '%'
-
-    # 6. Do the equivalent for another column
-    data.rename(columns={'Average_Actual_Return_Negative_Daily': 'Daily Return with Negative Prediction Strategy'}, inplace=True)
-    data['Daily Return with Negative Prediction Strategy'] = data['Daily Return with Negative Prediction Strategy'].astype(float).round(3).astype(str) + '%'
-
-    # 7. Rename two more columns
-    data.rename(columns={'Capital_Positive': 'Capital with Positive Prediction Strategy', 
-                         'Capital_Negative': 'Capital with Negative Prediction Strategy'}, inplace=True)
-    
-    # 8. Rename another column
-    data.rename(columns={'Capital_Daily_Investment': 'Capital Investing Every Day'}, inplace=True)
-    
-    # 9. Remove the Time_Taken column
-    data.drop(columns=['Time_Taken'], inplace=True)
-
-    # Round all numerical values to 3 decimal places
-    for col in data.select_dtypes(include=['float64']).columns:
-        data[col] = data[col].round(3)
-    
-    # Print the modified DataFrame on the streamlit web page
+    data = load_and_preprocess_data(csv_url)
+    st.write(data)
+elif selected_stock == 'VUKE (FTSE 100)':
+    st.write("Description for FTSE 100")
+    csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKE_Metrics.csv' # Replace with the actual URL for the INRG data file
+    data = load_and_preprocess_data(csv_url)
+    st.write(data)
+elif selected_stock == 'INRG (iShares Global Clean Energy)':
+    st.write("Description for INRG (iShares Global Clean Energy)")
+    csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/INRG_Metrics.csv' # Replace with the actual URL for the INRG data file
+    data = load_and_preprocess_data(csv_url)
+    st.write(data)
+elif selected_stock == 'VUKG (FTSE 100 Growth)':
+    st.write("Description for VUKG (FTSE 100)") # Add your description here
+    csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKG_Metrics.csv' # Replace with the actual URL for the VUKG data file
+    data = load_and_preprocess_data(csv_url)
     st.write(data)
 
 
 
 
 
+
+ 
