@@ -66,75 +66,85 @@ def load_and_preprocess_data(csv_url):
 
   return data
 
+csv_url_VUSA = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUSA_Metrics.csv'
+csv_url_VUKE = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKE_Metrics.csv'
+csv_url_INRG = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/INRG_Metrics.csv'
+csv_url_VUKG = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKG_Metrics.csv'
+
+data_VUSA = load_and_preprocess_data(csv_url_VUSA)
+data_VUKE = load_and_preprocess_data(csv_url_VUKE)
+data_INRG = load_and_preprocess_data(csv_url_INRG)
+data_VUKG = load_and_preprocess_data(csv_url_VUKG)
+
+styled_VUSA = data_VUSA.style.apply(lambda x: ['background: lightgreen' if x.name == 6 else '' for i in x], axis=1)\
+             .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
+             .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
+                                                           ('text-align', 'center'), 
+                                                           ('font-size', '10pt'), 
+                                                           ('height', '40px')])])
+
+styled_VUKE = data_VUKE.style.apply(lambda x: ['background: lightgreen' if x.name == 4 else '' for i in x], axis=1)\
+         .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
+         .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
+                                                       ('text-align', 'center'), 
+                                                       ('font-size', '10pt'), 
+                                                       ('height', '40px')])])
+
+styled_INRG = data_INRG.style.apply(lambda x: ['background: lightgreen' if x.name == 6 else '' for i in x], axis=1)\
+         .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
+         .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
+                                                       ('text-align', 'center'), 
+                                                       ('font-size', '10pt'), 
+                                                       ('height', '40px')])])
+
+styled_VUKG = data_VUKG.style.apply(lambda x: ['background: lightgreen' if x.name == 4 else '' for i in x], axis=1)\
+         .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
+         .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
+                                                       ('text-align', 'center'), 
+                                                       ('font-size', '10pt'), 
+                                                       ('height', '40px')])])
+
+
+
+
+
 selected_stock = st.selectbox('Select Security:', ['VUSA (S&P 500)', 'VUKE (FTSE 100)', 'INRG (iShares Global Clean Energy)', 'VUKG (FTSE 100 Growth)'])
 
 if selected_stock == 'VUSA (S&P 500)':
-    csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUSA_Metrics.csv'
-    data = load_and_preprocess_data(csv_url)
-    styled = data.style.apply(lambda x: ['background: lightgreen' if x.name == 6 else '' for i in x], axis=1)\
-             .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
-             .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
-                                                           ('text-align', 'center'), 
-                                                           ('font-size', '10pt'), 
-                                                           ('height', '40px')])])
-    st.markdown(styled.to_html(), unsafe_allow_html=True)
+    st.markdown(styled_VUSA.to_html(), unsafe_allow_html=True)
     st.markdown("")
     st.markdown("<small>The algorithm performs well with VUSA when investing following positive predictions, beating out the market rate.</small>", unsafe_allow_html=True)
     st.markdown("<small>The best investment strategy appears to be holding for 7 days: It has the highest daily return and capital growth.</small>", unsafe_allow_html=True)
-    optimal_strategies.append(get_optimal_strategy(data, 'VUSA (S&P 500)'))
 
 elif selected_stock == 'VUKE (FTSE 100)':
-    csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKE_Metrics.csv'
-    data = load_and_preprocess_data(csv_url)
-    styled = data.style.apply(lambda x: ['background: lightgreen' if x.name == 4 else '' for i in x], axis=1)\
-             .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
-             .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
-                                                           ('text-align', 'center'), 
-                                                           ('font-size', '10pt'), 
-                                                           ('height', '40px')])])
-    st.markdown(styled.to_html(), unsafe_allow_html=True)
+    st.markdown(styled_VUKE.to_html(), unsafe_allow_html=True)
     st.markdown("")
     st.markdown("<small>The algorithm performs well with VUKE when investing following positive predictions, beating out the market rate.</small>", unsafe_allow_html=True)
     st.markdown("<small>The best investment strategy appears to be holding for 5 days: It has the highest daily return and capital growth. .</small>", unsafe_allow_html=True)
     st.markdown("Holding for 2 days might be seen as an alternative, safer option. It has a slightly lower return, but the MAE suggests predicitons are more accurate.")
-    optimal_strategies.append(get_optimal_strategy(data, 'VUKE (FTSE 100)'))
-
 
 elif selected_stock == 'INRG (iShares Global Clean Energy)':
-    csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/INRG_Metrics.csv'
-    data = load_and_preprocess_data(csv_url)
-    styled = data.style.apply(lambda x: ['background: lightgreen' if x.name == 6 else '' for i in x], axis=1)\
-             .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
-             .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
-                                                           ('text-align', 'center'), 
-                                                           ('font-size', '10pt'), 
-                                                           ('height', '40px')])])
-    st.markdown(styled.to_html(), unsafe_allow_html=True)
+    st.markdown(styled_INRG.to_html(), unsafe_allow_html=True)
     st.markdown("")
     st.markdown("<small>The algorithm performs well with INRG when investing following positive predictions, beating out the market rate.</small>", unsafe_allow_html=True)
     st.markdown("<small>The best investment strategy appears to be holding for 7 days.</small>", unsafe_allow_html=True)
     st.markdown("<small>Holding for 9 days has a slightly higher return, the MAE is significantly higher, so it makes sense to go for the marginally less profitable option, with less risk. Of course, this depends on personal risk preferences.</small>", unsafe_allow_html=True)
-    optimal_strategies.append(get_optimal_strategy(data, 'INRG (iShares Global Clean Energy)'))
-
 
 elif selected_stock == 'VUKG (FTSE 100 Growth)':
-    csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKG_Metrics.csv'
-    data = load_and_preprocess_data(csv_url)
-    styled = data.style.apply(lambda x: ['background: lightgreen' if x.name == 4 else '' for i in x], axis=1)\
-             .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
-             .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
-                                                           ('text-align', 'center'), 
-                                                           ('font-size', '10pt'), 
-                                                           ('height', '40px')])])
-    st.markdown(styled.to_html(), unsafe_allow_html=True)
+    st.markdown(styled_VUKG.to_html(), unsafe_allow_html=True)
     st.markdown("")
     st.markdown("<small>The algorithm performs well with VUKG when investing following positive predictions, beating out the market rate.</small>", unsafe_allow_html=True)
     st.markdown("<small>The best investment strategy appears to be holding for 5 days. It has the highest daily return and capital growth.</small>", unsafe_allow_html=True)
     st.markdown("<small>Holding for 9 days has a slightly higher return, the MAE is significantly higher, so it makes sense to go for the marginally less profitable option, with less risk. Of course, this depends on personal risk preferences.</small>", unsafe_allow_html=True)
-    optimal_strategies.append(get_optimal_strategy(data, 'VUKG (FTSE 100 Growth)'))
 
 st.markdown("")
 st.markdown("")
+
+
+optimal_strategies.append(get_optimal_strategy(data_VUSA, 'VUSA (S&P 500)'))
+optimal_strategies.append(get_optimal_strategy(data_VUKE, 'VUKE (FTSE 100)'))
+optimal_strategies.append(get_optimal_strategy(data_INRG, 'INRG (iShares Global Clean Energy)'))
+optimal_strategies.append(get_optimal_strategy(data_VUKG, 'VUKG (FTSE 100 Growth)'))
 
 
 st.subheader('Choosing The Best Investment')
