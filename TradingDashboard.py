@@ -64,25 +64,27 @@ def load_and_preprocess_data(csv_url):
 selected_stock = st.selectbox('Select Security:', ['VUSA (S&P 500)', 'VUKE (FTSE 100)', 'INRG (iShares Global Clean Energy)', 'VUKG (FTSE 100 Growth)'])
 
 if selected_stock == 'VUSA (S&P 500)':
-    st.write("Description for VUSA (S&P 500)")
     csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUSA_Metrics.csv'
     data = load_and_preprocess_data(csv_url)
     st.write(data)
+    st.write("Description for VUSA (S&P 500)")
+
 elif selected_stock == 'VUKE (FTSE 100)':
-    st.write("Description for FTSE 100")
     csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKE_Metrics.csv' # Replace with the actual URL for the INRG data file
     data = load_and_preprocess_data(csv_url)
     st.write(data)
+    st.write("Description for FTSE 100")
 elif selected_stock == 'INRG (iShares Global Clean Energy)':
-    st.write("Description for INRG (iShares Global Clean Energy)")
     csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/INRG_Metrics.csv' # Replace with the actual URL for the INRG data file
     data = load_and_preprocess_data(csv_url)
     st.write(data)
+    st.write("Description for INRG (iShares Global Clean Energy)")
 elif selected_stock == 'VUKG (FTSE 100 Growth)':
-    st.write("Description for VUKG (FTSE 100)") # Add your description here
     csv_url = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKG_Metrics.csv' # Replace with the actual URL for the VUKG data file
     data = load_and_preprocess_data(csv_url)
     st.write(data)
+    st.write("Description for VUKG (FTSE 100)") # Add your description here
+
 
 
 
