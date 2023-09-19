@@ -167,6 +167,12 @@ if optimal_strategies:
     # Create the 'Priority' column
     result_df['Priority'] = result_df.index + 1
     
+    # Move 'Priority' column to the first position
+    cols = result_df.columns.tolist()
+    cols = [cols[-1]] + cols[:-1]
+    result_df = result_df[cols]
+
+    
     # Create a styling function
     def style_optimal_table(data):
         # Apply your styling here; no background highlighting in this version
