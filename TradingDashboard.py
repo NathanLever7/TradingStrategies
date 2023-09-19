@@ -167,8 +167,22 @@ if optimal_strategies:
     # Create the 'Priority' column
     result_df['Priority'] = result_df.index + 1
     
-    # Display the dataframe
-    st.write(result_df)
+    # Create a styling function
+    def style_optimal_table(data):
+        # Apply your styling here; no background highlighting in this version
+        styled = data.style.set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
+                          .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
+                                                                        ('text-align', 'center'), 
+                                                                        ('font-size', '10pt'), 
+                                                                        ('height', '40px')])])
+        return styled
+
+    # Apply the styling function to your result_df
+    styled_result_df = style_optimal_table(result_df)
+    
+    # Display the styled dataframe in HTML
+    st.markdown(styled_result_df.render(), unsafe_allow_html=True)
+
 
 
 
