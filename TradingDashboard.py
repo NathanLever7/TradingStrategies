@@ -98,7 +98,7 @@ styled_INRG = data_INRG.style.apply(lambda x: ['background: lightgreen' if x.nam
                                                        ('font-size', '10pt'), 
                                                        ('height', '40px')])])
 
-styled_VUKG = data_VUKG.style.apply(lambda x: ['background: lightgreen' if x.name == 4 else '' for i in x], axis=1)\
+styled_VUKG = data_VUKG.style.apply(lambda x: ['background: lightgreen' if x.name == 100 else '' for i in x], axis=1)\
          .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
          .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
                                                        ('text-align', 'center'), 
@@ -138,9 +138,8 @@ elif selected_stock == 'INRG (iShares Global Clean Energy)':
 elif selected_stock == 'VUKG (FTSE 100 Growth)':
     st.markdown(styled_VUKG.to_html(), unsafe_allow_html=True)
     st.markdown("")
-    st.markdown("<small>The algorithm performs well with VUKG when investing following positive predictions, beating out the market rate.</small>", unsafe_allow_html=True)
-    st.markdown("<small>The best investment strategy appears to be holding for 5 days. It has the highest daily return and capital growth.</small>", unsafe_allow_html=True)
-    st.markdown("<small>Holding for 9 days has a slightly higher return, the MAE is significantly higher, so it makes sense to go for the marginally less profitable option, with less risk. Of course, this depends on personal risk preferences.</small>", unsafe_allow_html=True)
+    st.markdown("<small>The algorithm performs poorly, with investing when positive is predicted being consistently beaten my the market rate.</small>", unsafe_allow_html=True)
+    st.markdown("<small>The strongest returns actually come when investing when the prediction of the algorithm is negative, over a 9 day horizon. Further investigation is needed.</small>", unsafe_allow_html=True)
     st.markdown("<small>Last updated: 02/10/23.</small>", unsafe_allow_html=True)
 
 
@@ -148,53 +147,53 @@ st.markdown("")
 st.markdown("")
 
 
-optimal_strategies.append(get_optimal_strategy(data_VUSA, 'VUSA (S&P 500)'))
-optimal_strategies.append(get_optimal_strategy(data_VUKE, 'VUKE (FTSE 100)'))
-optimal_strategies.append(get_optimal_strategy(data_INRG, 'INRG (iShares Global Clean Energy)'))
-optimal_strategies.append(get_optimal_strategy(data_VUKG, 'VUKG (FTSE 100 Growth)'))
+#optimal_strategies.append(get_optimal_strategy(data_VUSA, 'VUSA (S&P 500)'))
+#optimal_strategies.append(get_optimal_strategy(data_VUKE, 'VUKE (FTSE 100)'))
+#optimal_strategies.append(get_optimal_strategy(data_INRG, 'INRG (iShares Global Clean Energy)'))
+#optimal_strategies.append(get_optimal_strategy(data_VUKG, 'VUKG (FTSE 100 Growth)'))
 
 
-st.subheader('Choosing The Best Investment')
+#st.subheader('Choosing The Best Investment')
 
-st.markdown("<small>On any given day, the algorithm might suggest several investments. We need to decide which are the most profitable to target.</small>", unsafe_allow_html=True)
-st.markdown("<small>We will compare out previously identified optimal strategies for each security, and compile a ranking.</small>", unsafe_allow_html=True)
+#st.markdown("<small>On any given day, the algorithm might suggest several investments. We need to decide which are the most profitable to target.</small>", unsafe_allow_html=True)
+#st.markdown("<small>We will compare out previously identified optimal strategies for each security, and compile a ranking.</small>", unsafe_allow_html=True)
 
-if optimal_strategies:
-    result_df = pd.concat(optimal_strategies)
+#if optimal_strategies:
+#    result_df = pd.concat(optimal_strategies)
     
     # Reorder the columns
-    result_df = result_df[['Security', 'Daily Return with Positive Prediction Strategy', 'Capital with Positive Prediction Strategy', 'Average MAE', 'Days Holding']]
+#    result_df = result_df[['Security', 'Daily Return with Positive Prediction Strategy', 'Capital with Positive Prediction Strategy', 'Average MAE', 'Days Holding']]
     
     # Convert 'Daily Return with Positive Prediction Strategy' to float for sorting
-    result_df.loc[:, 'Daily Return with Positive Prediction Strategy'] = result_df['Daily Return with Positive Prediction Strategy'].str.replace('%','').astype(float)
+#    result_df.loc[:, 'Daily Return with Positive Prediction Strategy'] = result_df['Daily Return with Positive Prediction Strategy'].str.replace('%','').astype(float)
     
     # Sort the dataframe based on 'Daily Return with Positive Prediction Strategy' and reset the index
-    result_df = result_df.sort_values(by='Daily Return with Positive Prediction Strategy', ascending=False).reset_index(drop=True)
+#    result_df = result_df.sort_values(by='Daily Return with Positive Prediction Strategy', ascending=False).reset_index(drop=True)
     
     # Create the 'Priority' column
-    result_df['Priority'] = result_df.index + 1
+#    result_df['Priority'] = result_df.index + 1
     
     # Move 'Priority' column to the first position
-    cols = result_df.columns.tolist()
-    cols = [cols[-1]] + cols[:-1]
-    result_df = result_df[cols]
+#    cols = result_df.columns.tolist()
+#    cols = [cols[-1]] + cols[:-1]
+#    result_df = result_df[cols]
 
     
     # Create a styling function
-    def style_optimal_table(data):
+#    def style_optimal_table(data):
         # Apply your styling here; no background highlighting in this version
-        styled = data.style.set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
-                          .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
-                                                                        ('text-align', 'center'), 
-                                                                        ('font-size', '10pt'), 
-                                                                        ('height', '40px')])])
-        return styled
+#        styled = data.style.set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
+#                          .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
+#                                                                        ('text-align', 'center'), 
+#                                                                        ('font-size', '10pt'), 
+#                                                                        ('height', '40px')])])
+#        return styled
 
     # Apply the styling function to your result_df
-    styled_result_df = style_optimal_table(result_df)
+#    styled_result_df = style_optimal_table(result_df)
     
     # Display the styled dataframe in HTML
-    st.markdown(styled_result_df.to_html(), unsafe_allow_html=True)
+#    st.markdown(styled_result_df.to_html(), unsafe_allow_html=True)
 
 
 
