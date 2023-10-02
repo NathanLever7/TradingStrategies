@@ -77,7 +77,7 @@ data_VUKE = load_and_preprocess_data(csv_url_VUKE)
 data_INRG = load_and_preprocess_data(csv_url_INRG)
 data_VUKG = load_and_preprocess_data(csv_url_VUKG)
 
-styled_VUSA = data_VUSA.style.apply(lambda x: ['background: lightgreen' if x.name == 6 else '' for i in x], axis=1)\
+styled_VUSA = data_VUSA.style.apply(lambda x: ['background: lightgreen' if x.name == 100 else '' for i in x], axis=1)\
              .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
              .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
                                                            ('text-align', 'center'), 
@@ -114,8 +114,8 @@ selected_stock = st.selectbox('Select Security:', ['VUSA (S&P 500)', 'VUKE (FTSE
 if selected_stock == 'VUSA (S&P 500)':
     st.markdown(styled_VUSA.to_html(), unsafe_allow_html=True)
     st.markdown("")
-    st.markdown("<small>The algorithm performs well with VUSA when investing following positive predictions, beating out the market rate.</small>", unsafe_allow_html=True)
-    st.markdown("<small>The best investment strategy appears to be holding for 7 days: It has the highest daily return and capital growth.</small>", unsafe_allow_html=True)
+    st.markdown("<small>The algorithm performs very poorly. In no cases does the positive prediction strategy beat the investing every day strategy.</small>", unsafe_allow_html=True)
+    st.markdown("<small>Interestingly, the predictive accuracy is actually so bad, that for horizons of 1, 2 and 3 days, investing when the model advises you to not invest, is better than the market rate. It is worth investigating this further, particularly for the 1 day horizon.</small>", unsafe_allow_html=True)
 
 elif selected_stock == 'VUKE (FTSE 100)':
     st.markdown(styled_VUKE.to_html(), unsafe_allow_html=True)
