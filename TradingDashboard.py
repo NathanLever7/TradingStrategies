@@ -8,12 +8,13 @@ st.title('Index Trading Strategies')
 st.subheader('Choosing Optimal Strategies for Each Security')
 
 # Add descriptive text under the subheading
-st.write('''When choosing our investments, we wish to run models on multiple different securities, judging their profitability over different time horizons. However, this is computationally expensive. In this section, we look at each security and define the optimal time horizon. This optimal time horizon is what we will use when running our models for investment suggestions each day.''')
+st.write('''When choosing our investments, we wish to run models on multiple different securities, judging their profitability over different time horizons. However, this is computationally expensive. In this section, we look at each security, evaluate the algorithm's performance, and define any optimal investment strategies. This optimal investment strategy is what we will use when running our models for investment suggestions each day.''')
 st.write('''Each dataframe has information on the per day returns for each holding length strategy, and contrasts results when investing when predictions are positive, negative, and regardless of prediction. This shows the performance of our algorithm.''')
 st.write('''Each dataframe also has the overall capital when following an investment strategy that is as follows:''')
 st.write('''    1. Our given starting capital is 100.''')
 st.write('''    2. Invest according to the strategy (whether predictions are positive, negative or irrespective of the prediction).''')
 st.write('''    3. We decide to invest a fixed amount for each respective strategy, which corresponds to (1/(Length of Holding Period))*100. This means that the 1 day strategy has an investment of 100 each time, whilst the 10 day strategy has an investment of 10 each time. This is to ensure there is spare capacity for further investment, if required.''')
+st.write('''It is important to realise that this is not a realistic scenario. In reality, investors are likely to invest funds dynamically, adjusting the amount invested based on past and predicted performance. In addition, this set up allows 'investors' to go into negative capital. FOr instance, for 1 day investing, the 'investor' invests 100, regardless of how much capital it actually has. Despite these issues, this method still gives a good overall look at what performance is like. It is important to know that results are heavily affected by variance and luck. This is why small discrepancies like this are not overly vital, since we are just looking for an idea of viable strategies.''')
 st.write('''We gather the results of the different strategies, and use this to define an optimal approach.''')
 st.write('''NB: The data used begins from 01/01/2022, and the end date is defined for each security.''')
 
