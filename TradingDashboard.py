@@ -15,7 +15,7 @@ st.write('''    1. Our given starting capital is 100.''')
 st.write('''    2. Invest according to the strategy (whether predictions are positive, negative or irrespective of the prediction).''')
 st.write('''    3. We decide to invest a fixed amount for each respective strategy, which corresponds to (1/(Length of Holding Period))*100. This means that the 1 day strategy has an investment of 100 each time, whilst the 10 day strategy has an investment of 10 each time. This is to ensure there is spare capacity for further investment, if required.''')
 st.write('''It is important to realise that this is not a realistic scenario. In reality, investors are likely to invest funds dynamically, adjusting the amount invested based on past and predicted performance. In addition, our set up allows 'investors' to go into negative capital. For instance, for 1 day investing, the 'investor' invests 100, regardless of how much capital they actually have. Despite these issues, this method still gives a good overall look at performance in each case.''')
-st.write('''We gather the results of the different strategies, and use this to define an optimal approach.''')
+st.write('''We gather the results of the different strategies, and use this to define an optimal approach. It is important to emphasise, future performance does not neccesarily mean it will follow past performance, but it can be a good indication.''')
 st.write('''NB: The data used begins from 01/01/2022, and the end date is defined for each security.''')
 
 optimal_strategies = []
@@ -84,14 +84,14 @@ styled_VUSA = data_VUSA.style.apply(lambda x: ['background: lightgreen' if x.nam
                                                            ('font-size', '10pt'), 
                                                            ('height', '40px')])])
 
-styled_VUKE = data_VUKE.style.apply(lambda x: ['background: lightgreen' if x.name == 4 else '' for i in x], axis=1)\
+styled_VUKE = data_VUKE.style.apply(lambda x: ['background: lightgreen' if x.name == 100 else '' for i in x], axis=1)\
          .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
          .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
                                                        ('text-align', 'center'), 
                                                        ('font-size', '10pt'), 
                                                        ('height', '40px')])])
 
-styled_INRG = data_INRG.style.apply(lambda x: ['background: lightgreen' if x.name == 6 else '' for i in x], axis=1)\
+styled_INRG = data_INRG.style.apply(lambda x: ['background: lightgreen' if x.name == 4 else '' for i in x], axis=1)\
          .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
          .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
                                                        ('text-align', 'center'), 
@@ -116,20 +116,24 @@ if selected_stock == 'VUSA (S&P 500)':
     st.markdown("")
     st.markdown("<small>The algorithm performs very poorly. In no cases does the positive prediction strategy beat the investing every day strategy.</small>", unsafe_allow_html=True)
     st.markdown("<small>Interestingly, the predictive accuracy is actually so bad, that for horizons of 1, 2 and 3 days, investing when the model advises you to not invest, is better than the market rate. It is worth investigating this further, particularly for the 1 day horizon.</small>", unsafe_allow_html=True)
+    st.markdown("<small>Last updated: 02/10/23.</small>", unsafe_allow_html=True)
+
 
 elif selected_stock == 'VUKE (FTSE 100)':
     st.markdown(styled_VUKE.to_html(), unsafe_allow_html=True)
     st.markdown("")
-    st.markdown("<small>The algorithm performs well with VUKE when investing following positive predictions, beating out the market rate.</small>", unsafe_allow_html=True)
-    st.markdown("<small>The best investment strategy appears to be holding for 5 days: It has the highest daily return and capital growth. .</small>", unsafe_allow_html=True)
-    st.markdown("Holding for 2 days might be seen as an alternative, safer option. It has a slightly lower return, but the MAE suggests predicitons are more accurate.")
+    st.markdown("<small>The algorithm performs poorly, with only 1 of the positive prediction investment strategies beating the respective market rate for that time horizon. This is holding for 3 days, but even so, the capital for investing every day is greater.</small>", unsafe_allow_html=True)
+    st.markdown("<small>In fact, the only times when the market rate is beaten is when we invest despite predicting negative returns, for horizons 7-10. This shows the algorithm as a poor predictor, but in fact investing when predictions are negative could be a viable strategy here. Further investigation is needed.</small>", unsafe_allow_html=True)
+    st.markdown("<small>Last updated: 02/10/23.</small>", unsafe_allow_html=True)
+
 
 elif selected_stock == 'INRG (iShares Global Clean Energy)':
     st.markdown(styled_INRG.to_html(), unsafe_allow_html=True)
     st.markdown("")
-    st.markdown("<small>The algorithm performs well with INRG when investing following positive predictions, beating out the market rate.</small>", unsafe_allow_html=True)
-    st.markdown("<small>The best investment strategy appears to be holding for 7 days.</small>", unsafe_allow_html=True)
-    st.markdown("<small>Holding for 9 days has a slightly higher return, the MAE is significantly higher, so it makes sense to go for the marginally less profitable option, with less risk. Of course, this depends on personal risk preferences.</small>", unsafe_allow_html=True)
+    st.markdown("<small>The algorithm performs well. Investing when positive beats out investing every day in each of the horizons.</small>", unsafe_allow_html=True)
+    st.markdown("<small>The best investment strategy appears to be holding for 5 days, after the algorithm predicts positive predictions.</small>", unsafe_allow_html=True)
+    st.markdown("<small>Last updated: 02/10/23.</small>", unsafe_allow_html=True)
+
 
 elif selected_stock == 'VUKG (FTSE 100 Growth)':
     st.markdown(styled_VUKG.to_html(), unsafe_allow_html=True)
@@ -137,6 +141,8 @@ elif selected_stock == 'VUKG (FTSE 100 Growth)':
     st.markdown("<small>The algorithm performs well with VUKG when investing following positive predictions, beating out the market rate.</small>", unsafe_allow_html=True)
     st.markdown("<small>The best investment strategy appears to be holding for 5 days. It has the highest daily return and capital growth.</small>", unsafe_allow_html=True)
     st.markdown("<small>Holding for 9 days has a slightly higher return, the MAE is significantly higher, so it makes sense to go for the marginally less profitable option, with less risk. Of course, this depends on personal risk preferences.</small>", unsafe_allow_html=True)
+    st.markdown("<small>Last updated: 02/10/23.</small>", unsafe_allow_html=True)
+
 
 st.markdown("")
 st.markdown("")
