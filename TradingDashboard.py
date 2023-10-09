@@ -208,16 +208,16 @@ elif page == "Can Past Performance Guide Future Prediction?":
     st.write('''We assume that the algorithm performance is consistent over time. In this section, we put this to the test.''')
 
     # URLs for the datasets
-    csv_urls = {
-        'VUSA': 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUSA_Predictions.csv',
-        'VUKE': 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKE_Predictions.csv',
-        'INRG': 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/INRG_Predictions.csv',
-        'VUKG': 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKG_Predictions.csv'
+    xlsx_urls = {
+        'VUSA': 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUSA_Predictions.xlsx',
+        'VUKE': 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKE_Predictions.xlsx',
+        'INRG': 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/INRG_Predictions.xlsx',
+        'VUKG': 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKG_Predictions.xlsx'
     }
 
-    for name, url in csv_urls.items():
-        # Load the CSV data into a Pandas DataFrame
-        df = pd.read_csv(url)
+    for name, url in xlsx_urls.items():
+        # Load the Excel data into a Pandas DataFrame
+        df = pd.read_excel(url, sheet_name='Sheet1')
         
         # Plot the data
         st.write(f"### {name} Time Series")
@@ -226,6 +226,7 @@ elif page == "Can Past Performance Guide Future Prediction?":
         st.line_chart(df.set_index('Date')[['Capital_Positive']], use_container_width=True, color="green")
         st.line_chart(df.set_index('Date')[['Capital_Negative']], use_container_width=True, color="red")
         st.line_chart(df.set_index('Date')[['Daily_Investment']], use_container_width=True, color="gray")
+
 
 
 
