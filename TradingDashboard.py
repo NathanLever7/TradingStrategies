@@ -200,7 +200,7 @@ if page == "Home":
         
         # Display the styled dataframe in HTML
     #    st.markdown(styled_result_df.to_html(), unsafe_allow_html=True)
-    
+
 
 elif page == "Can Past Performance Guide Future Prediction?":
     st.title("Can Past Performance Guide Future Prediction?")
@@ -217,18 +217,17 @@ elif page == "Can Past Performance Guide Future Prediction?":
     # Convert 'Date' column to datetime type if it's not already
     df['Date'] = pd.to_datetime(df['Date'])
     
-    # Plot the data
-    st.write("### INRG Time Series for the 5-Day Strategy")
+    # Melt the DataFrame to long format for Altair plotting
+    df_melted = df.melt(id_vars='Date', value_vars=['Capital_Positive', 'Capital_Negative', 'Daily_Investment'])
+    
+    # Create Altair chart
+    chart = alt.Chart(df_melted).mark_line().encode(
+        x='Date:T',
+        y=alt.Y('value:Q', scale=alt.Scale(zero=False)),
+        color='variable:N'
+    ).properties(
+        title="INRG Time Series for the 5-Day Strategy"
+    )
+    
+    st.altair_chart(chart, use_container_width=True)
 
-    # Create Altair charts
-    for column, color in zip(['Capital_Positive', 'Capital_Negative', 'Daily_Investment'], ['green', 'red', 'gray']):
-        chart = alt.Chart(df).mark_line().encode(
-            x='Date:T',
-            y=alt.Y(f'{column}:Q', scale=alt.Scale(zero=False)),
-            color=alt.value(color)
-        ).properties(
-            title=f"INRG {column.replace('_', ' ')}"
-        )
-        st.altair_chart(chart, use_container_width=True)
-
- 
