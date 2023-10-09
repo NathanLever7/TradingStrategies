@@ -207,6 +207,26 @@ elif page == "Can Past Performance Guide Future Prediction?":
     # Add descriptive text under the subheading
     st.write('''We assume that the algorithm performance is consistent over time. In this section, we put this to the test.''')
 
+    # URLs for the datasets
+    csv_urls = {
+        'VUSA': 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUSA_Predictions.csv',
+        'VUKE': 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKE_Predictions.csv',
+        'INRG': 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/INRG_Predictions.csv',
+        'VUKG': 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKG_Predictions.csv'
+    }
+
+    for name, url in csv_urls.items():
+        # Load the CSV data into a Pandas DataFrame
+        df = pd.read_csv(url)
+        
+        # Plot the data
+        st.write(f"### {name} Time Series")
+        
+        # Separate lines for each value
+        st.line_chart(df.set_index('Date')[['Capital_Positive']], use_container_width=True, color="green")
+        st.line_chart(df.set_index('Date')[['Capital_Negative']], use_container_width=True, color="red")
+        st.line_chart(df.set_index('Date')[['Daily_Investment']], use_container_width=True, color="gray")
+
 
 
  
