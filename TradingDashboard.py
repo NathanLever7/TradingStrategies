@@ -218,7 +218,7 @@ elif page == "Can Past Performance Guide Future Prediction?":
     df['Date'] = pd.to_datetime(df['Date'])
     
     # Melt the DataFrame to long format for Altair plotting
-    df_melted = df.melt(id_vars='Date', value_vars=['Capital_Positive', 'Capital_Negative', 'Daily_Investment'])
+    df_melted = df.melt(id_vars='Date', value_vars=['Capital_Positive', 'Capital_Negative', 'Capital_Daily_Investment'])
     
     # Create Altair chart
     chart = alt.Chart(df_melted).mark_line().encode(
