@@ -220,10 +220,12 @@ elif page == "Can Past Performance Guide Future Prediction?":
     # Melt the DataFrame to long format for Altair plotting
     df_melted = df.melt(id_vars='Date', value_vars=['Capital_Positive', 'Capital_Negative', 'Capital_Daily_Investment'])
     
+    # Create Altair chart with custom color mapping
     chart = alt.Chart(df_melted).mark_line().encode(
         x=alt.X('Date:T', axis=alt.Axis(format="%b %Y")),  # Custom date format here
         y=alt.Y('value:Q', scale=alt.Scale(zero=False)),
-        color='variable:N'
+        color=alt.Color('variable:N', scale=alt.Scale(domain=['Capital_Positive', 'Capital_Negative', 'Capital_Daily_Investment'],
+                                                      range=['red', 'green', 'gray']))
     ).properties(
         title="INRG Time Series for the 5-Day Strategy"
     )
