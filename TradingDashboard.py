@@ -203,31 +203,23 @@ if page == "Home":
 
 elif page == "Can Past Performance Guide Future Prediction?":
     st.title("Can Past Performance Guide Future Prediction?")
-
-    # Add descriptive text under the subheading
     st.write('''We assume that the algorithm performance is consistent over time. In this section, we put this to the test.''')
-
-    # URLs for the datasets
-    xlsx_urls = {
-        'VUSA': 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUSA_Predictions.xlsx',
-        'VUKE': 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKE_Predictions.xlsx',
-        'INRG': 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/INRG_Predictions.xlsx',
-        'VUKG': 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKG_Predictions.xlsx'
-    }
-
-    for name, url in xlsx_urls.items():
-        # Load the Excel data into a Pandas DataFrame
-        df = pd.read_excel(url, sheet_name='Sheet1')
-        
-        # Plot the data
-        st.write(f"### {name} Time Series")
-        
-        # Separate lines for each value
-        st.line_chart(df.set_index('Date')[['Capital_Positive']], use_container_width=True, color="green")
-        st.line_chart(df.set_index('Date')[['Capital_Negative']], use_container_width=True, color="red")
-        st.line_chart(df.set_index('Date')[['Daily_Investment']], use_container_width=True, color="gray")
-
-
-
+    
+    # URL for the INRG dataset
+    csv_url_INRG = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/INRG_Predictions_Day5.csv'
+    
+    # Load the CSV data into a Pandas DataFrame
+    df = pd.read_csv(csv_url_INRG)
+    
+    # Convert 'Date' column to datetime type if it's not already
+    df['Date'] = pd.to_datetime(df['Date'])
+    
+    # Create the line chart
+    st.write("### INRG Time Series for the 5-Day Strategy")
+ 
+    # Separate lines for each value with specific colors
+    st.line_chart(df.set_index('Date')[['Capital_Positive']], use_container_width=True, color="green")
+    st.line_chart(df.set_index('Date')[['Capital_Negative']], use_container_width=True, color="red")
+    st.line_chart(df.set_index('Date')[['Daily_Investment']], use_container_width=True, color="gray")
 
  
