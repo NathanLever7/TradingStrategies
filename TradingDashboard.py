@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 # Create a sidebar with navigation options
-page = st.sidebar.selectbox("Select a page:", ["Home", "Can past performance guide future prediction?"])
+page = st.sidebar.selectbox("Select a page:", ["Home", "Can Past Performance Guide Future Prediction?"])
 
 # Define content for each page
 if page == "Home":
@@ -204,9 +204,8 @@ if page == "Home":
 elif page == "Can past performance guide future prediction?":
     st.title("Can past performance guide future prediction?")
 
-
-
-
+    # Add descriptive text under the subheading
+    st.write('''We assume that the algorithm performance is consistent over time. In this section, we put this to the test.''')
 
 
 
