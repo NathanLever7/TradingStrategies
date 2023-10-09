@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import altair as alt
 
 # Create a sidebar with navigation options
 page = st.sidebar.selectbox("Select a page:", ["Home", "Can Past Performance Guide Future Prediction?"])
@@ -203,6 +204,8 @@ if page == "Home":
 
 elif page == "Can Past Performance Guide Future Prediction?":
     st.title("Can Past Performance Guide Future Prediction?")
+    
+    # Add descriptive text under the subheading
     st.write('''We assume that the algorithm performance is consistent over time. In this section, we put this to the test.''')
     
     # URL for the INRG dataset
@@ -214,12 +217,18 @@ elif page == "Can Past Performance Guide Future Prediction?":
     # Convert 'Date' column to datetime type if it's not already
     df['Date'] = pd.to_datetime(df['Date'])
     
-    # Create the line chart
+    # Plot the data
     st.write("### INRG Time Series for the 5-Day Strategy")
- 
-    # Separate lines for each value with specific colors
-    st.line_chart(df.set_index('Date')[['Capital_Positive']], use_container_width=True, color="green")
-    st.line_chart(df.set_index('Date')[['Capital_Negative']], use_container_width=True, color="red")
-    st.line_chart(df.set_index('Date')[['Daily_Investment']], use_container_width=True, color="gray")
+
+    # Create Altair charts
+    for column, color in zip(['Capital_Positive', 'Capital_Negative', 'Daily_Investment'], ['green', 'red', 'gray']):
+        chart = alt.Chart(df).mark_line().encode(
+            x='Date:T',
+            y=alt.Y(f'{column}:Q', scale=alt.Scale(zero=False)),
+            color=alt.value(color)
+        ).properties(
+            title=f"INRG {column.replace('_', ' ')}"
+        )
+        st.altair_chart(chart, use_container_width=True)
 
  
