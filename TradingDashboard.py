@@ -205,7 +205,7 @@ elif page == "Can past performance guide future prediction?":
     st.title("Can past performance guide future prediction?")
 
     # Add descriptive text under the subheading
-    st.write('''We assume that the algorithm performance is consistent over time. In this section, we put this to the test.''')
+    #st.write('''We assume that the algorithm performance is consistent over time. In this section, we put this to the test.''')
 
 
 
