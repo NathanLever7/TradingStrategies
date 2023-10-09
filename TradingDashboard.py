@@ -231,3 +231,21 @@ elif page == "Can Past Performance Guide Future Prediction?":
     
     st.altair_chart(chart, use_container_width=True)
 
+    # Calculate the difference between 'Capital_Positive' and 'Capital_Daily_Investment'
+    df['Difference_Positive_DailyInvestment'] = df['Capital_Positive'] - df['Capital_Daily_Investment']
+    
+    # Create a new DataFrame for the Difference series
+    df_diff = df[['Date', 'Difference_Positive_DailyInvestment']].copy()
+    df_diff['Date'] = pd.to_datetime(df_diff['Date'])
+    
+    # Create Altair chart for the difference
+    chart_diff = alt.Chart(df_diff).mark_line().encode(
+        x=alt.X('Date:T', axis=alt.Axis(format="%b %Y")),
+        y=alt.Y('Difference_Positive_DailyInvestment:Q', scale=alt.Scale(zero=False))
+    ).properties(
+        title="Difference between Positive and Daily Investment Strategies"
+    )
+    
+    # Display the new Altair chart
+    st.altair_chart(chart_diff, use_container_width=True)
+
