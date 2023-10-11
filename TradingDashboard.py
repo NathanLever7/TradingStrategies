@@ -227,8 +227,8 @@ if page == "Home":
     elif selected_stock == 'XLK (Technology Fund)':
         st.markdown(styled_XLK.to_html(), unsafe_allow_html=True)
         st.markdown("")
-        st.markdown("<small>The algorithm performs poorly, with investing when positive being consistenyl beaten by the market rate.</small>", unsafe_allow_html=True)
-        st.markdown("<small>Returns are generally high, but since we want to focus on using the algorithm, it seems best to ignore this ETF.</small>", unsafe_allow_html=True)
+        st.markdown("<small>The algorithm performs poorly, with investing when positive being consistently beaten by the market rate.</small>", unsafe_allow_html=True)
+        st.markdown("<small>Returns are generally high, but the algorithms almost never outperform investing every day. Since we want to focus on using the algorithm, it seems best to ignore this ETF.</small>", unsafe_allow_html=True)
         st.markdown("<small>Last updated: 11/10/23.</small>", unsafe_allow_html=True)
     
     
