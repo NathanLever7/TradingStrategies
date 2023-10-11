@@ -228,7 +228,7 @@ elif page == "Can Past Performance Guide Future Prediction?":
         chart = alt.Chart(df_melted).mark_line().encode(
             x=alt.X('Date:T', axis=alt.Axis(format="%b %Y")),  # Custom date format here
             y=alt.Y('value:Q', scale=alt.Scale(zero=False)),
-            color=alt.Color('Variable:N', scale=alt.Scale(domain=['Capital_Positive', 'Capital_Negative', 'Capital_Daily_Investment'],
+            color=alt.Color('variable:N', scale=alt.Scale(domain=['Capital_Positive', 'Capital_Negative', 'Capital_Daily_Investment'],
                                                           range=['green', 'red', 'gray']))
         ).properties(
             title="Capital Over Time"
