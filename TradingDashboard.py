@@ -77,11 +77,24 @@ if page == "Home":
     csv_url_VUKE = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKE_Metrics.csv'
     csv_url_INRG = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/INRG_Metrics.csv'
     csv_url_VUKG = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VUKG_Metrics.csv'
+    csv_url_ARKK = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/ARKK_Metrics.csv'
+    csv_url_GLD = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/GLD_Metrics.csv'
+    csv_url_VNQ = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/VNQ_Metrics.csv'
+    csv_url_EEM = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/EEM_Metrics.csv'
+    csv_url_XLK = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/XLK_Metrics.csv'
+
     
     data_VUSA = load_and_preprocess_data(csv_url_VUSA)
     data_VUKE = load_and_preprocess_data(csv_url_VUKE)
     data_INRG = load_and_preprocess_data(csv_url_INRG)
     data_VUKG = load_and_preprocess_data(csv_url_VUKG)
+    data_ARKK = load_and_preprocess_data(csv_url_ARKK)
+    data_GLD = load_and_preprocess_data(csv_url_GLD)
+    data_VNQ = load_and_preprocess_data(csv_url_VNQ)
+    data_EEM = load_and_preprocess_data(csv_url_EEM)
+    data_XLK = load_and_preprocess_data(csv_url_XLK)
+
+    
     
     styled_VUSA = data_VUSA.style.apply(lambda x: ['background: lightgreen' if x.name == 100 else '' for i in x], axis=1)\
                  .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
@@ -111,11 +124,46 @@ if page == "Home":
                                                            ('font-size', '10pt'), 
                                                            ('height', '40px')])])
     
+    styled_ARKK = data_ARKK.style.apply(lambda x: ['background: lightgreen' if x.name == 100 else '' for i in x], axis=1)\
+         .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
+         .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
+                                                       ('text-align', 'center'), 
+                                                       ('font-size', '10pt'), 
+                                                       ('height', '40px')])])
+
+    styled_GLD = data_GLD.style.apply(lambda x: ['background: lightgreen' if x.name == 3 else '' for i in x], axis=1)\
+         .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
+         .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
+                                                       ('text-align', 'center'), 
+                                                       ('font-size', '10pt'), 
+                                                       ('height', '40px')])])
+
+    styled_VNQ = data_VNQ.style.apply(lambda x: ['background: lightgreen' if x.name == 4 else '' for i in x], axis=1)\
+         .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
+         .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
+                                                       ('text-align', 'center'), 
+                                                       ('font-size', '10pt'), 
+                                                       ('height', '40px')])])
+
+    styled_EEM = data_EEM.style.apply(lambda x: ['background: lightgreen' if x.name == 100 else '' for i in x], axis=1)\
+         .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
+         .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
+                                                       ('text-align', 'center'), 
+                                                       ('font-size', '10pt'), 
+                                                       ('height', '40px')])])
+
+    styled_XLK = data_XLK.style.apply(lambda x: ['background: lightgreen' if x.name == 100 else '' for i in x], axis=1)\
+         .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
+         .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
+                                                       ('text-align', 'center'), 
+                                                       ('font-size', '10pt'), 
+                                                       ('height', '40px')])])
     
     
     
     
-    selected_stock = st.selectbox('Select Security:', ['VUSA (S&P 500)', 'VUKE (FTSE 100)', 'INRG (iShares Global Clean Energy)', 'VUKG (FTSE 100 Growth)'])
+    
+    selected_stock = st.selectbox('Select Security:', ['VUSA (S&P 500)', 'VUKE (FTSE 100)', 'INRG (iShares Global Clean Energy)', 'VUKG (FTSE 100 Growth)', 'ARKK (ARK Innovation)', 'GLD (Gold)', 'VNQ (US Real Estate)', 'EEM (Emerging Markets)', 'XLK (Technology Fund)'])
     
     if selected_stock == 'VUSA (S&P 500)':
         st.markdown(styled_VUSA.to_html(), unsafe_allow_html=True)
@@ -144,9 +192,44 @@ if page == "Home":
     elif selected_stock == 'VUKG (FTSE 100 Growth)':
         st.markdown(styled_VUKG.to_html(), unsafe_allow_html=True)
         st.markdown("")
-        st.markdown("<small>The algorithm performs poorly, with investing when positive is predicted being consistently beaten my the market rate.</small>", unsafe_allow_html=True)
+        st.markdown("<small>The algorithm performs poorly, with investing when positive being consistently beaten my the market rate.</small>", unsafe_allow_html=True)
         st.markdown("<small>The strongest returns actually come when investing when the prediction of the algorithm is negative, over a 9 day horizon. Further investigation is needed.</small>", unsafe_allow_html=True)
         st.markdown("<small>Last updated: 02/10/23.</small>", unsafe_allow_html=True)
+
+    elif selected_stock == 'ARKK (ARK Innovation)':
+        st.markdown(styled_ARKK.to_html(), unsafe_allow_html=True)
+        st.markdown("")
+        st.markdown("<small>The algorithm performs poorly, with investing when positive being consistently beaten my the market rate.</small>", unsafe_allow_html=True)
+        st.markdown("<small>The strongest returns actually come when investing when the prediction of the algorithm is negative, over a 1 day horizon. Further investigation is needed.</small>", unsafe_allow_html=True)
+        st.markdown("<small>Last updated: 11/10/23.</small>", unsafe_allow_html=True)
+
+    elif selected_stock == 'GLD (Gold)':
+        st.markdown(styled_GLD.to_html(), unsafe_allow_html=True)
+        st.markdown("")
+        st.markdown("<small>The algorithm performs adequately over certain time horizons, beating the market rate on a few occasions.</small>", unsafe_allow_html=True)
+        st.markdown("<small>The strongest returns come when investing when the prediction of the algorithm is positive, over a 3 day horizon.</small>", unsafe_allow_html=True)
+        st.markdown("<small>Last updated: 11/10/23.</small>", unsafe_allow_html=True)
+
+    elif selected_stock == 'VNQ (US Real Estate)':
+        st.markdown(styled_VNQ.to_html(), unsafe_allow_html=True)
+        st.markdown("")
+        st.markdown("<small>The algorithm performs excellently, with investing when positive consistently beating the market rate, and usually by a significant margin.</small>", unsafe_allow_html=True)
+        st.markdown("<small>The strongest returns come when investing when the prediction of the algorithm is positive, over a 4 day horizon.</small>", unsafe_allow_html=True)
+        st.markdown("<small>Last updated: 11/10/23.</small>", unsafe_allow_html=True)
+
+    elif selected_stock == 'EEM (Emerging Markets)':
+        st.markdown(styled_EEM.to_html(), unsafe_allow_html=True)
+        st.markdown("")
+        st.markdown("<small>The algorithm performs adequately, with investing when positive beating the market rate on occasion.</small>", unsafe_allow_html=True)
+        st.markdown("<small>Despite this, returns are always negative for any of the strategies, so it seems best to ignore this ETF.</small>", unsafe_allow_html=True)
+        st.markdown("<small>Last updated: 11/10/23.</small>", unsafe_allow_html=True)
+
+    elif selected_stock == 'XLK (Technology Fund)':
+        st.markdown(styled_XLK.to_html(), unsafe_allow_html=True)
+        st.markdown("")
+        st.markdown("<small>The algorithm performs poorly, with investing when positive being consistenyl beaten by the market rate.</small>", unsafe_allow_html=True)
+        st.markdown("<small>Returns are generally high, but since we want to focus on using the algorithm, it seems best to ignore this ETF.</small>", unsafe_allow_html=True)
+        st.markdown("<small>Last updated: 11/10/23.</small>", unsafe_allow_html=True)
     
     
     st.markdown("")
