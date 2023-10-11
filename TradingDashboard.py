@@ -131,14 +131,14 @@ if page == "Home":
                                                        ('font-size', '10pt'), 
                                                        ('height', '40px')])])
 
-    styled_GLD = data_GLD.style.apply(lambda x: ['background: lightgreen' if x.name == 3 else '' for i in x], axis=1)\
+    styled_GLD = data_GLD.style.apply(lambda x: ['background: lightgreen' if x.name == 2 else '' for i in x], axis=1)\
          .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
          .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
                                                        ('text-align', 'center'), 
                                                        ('font-size', '10pt'), 
                                                        ('height', '40px')])])
 
-    styled_VNQ = data_VNQ.style.apply(lambda x: ['background: lightgreen' if x.name == 4 else '' for i in x], axis=1)\
+    styled_VNQ = data_VNQ.style.apply(lambda x: ['background: lightgreen' if x.name == 3 else '' for i in x], axis=1)\
          .set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
          .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
                                                        ('text-align', 'center'), 
