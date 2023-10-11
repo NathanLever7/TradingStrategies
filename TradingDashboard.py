@@ -205,51 +205,58 @@ if page == "Home":
 elif page == "Can Past Performance Guide Future Prediction?":
     st.title("Can Past Performance Guide Future Prediction?")
     
-    # Add descriptive text under the subheading
     st.write('''If we take the historical success as an indicator for future success with a trading strategy, it is important to evaluate if the past success was consistent. In this section, we evaluate the most successful cases in more detail.''')
 
-    st.subheader("INRG 5-Day Hold")
+    with st.expander("INRG 5-Day Hold", expanded=True):
     
-    # URL for the INRG dataset
-    csv_url_INRG = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/INRG_Predictions_Day5.csv'
+        
+        st.subheader("INRG 5-Day Hold")
+        
+        # URL for the INRG dataset
+        csv_url_INRG = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/INRG_Predictions_Day5.csv'
+        
+        # Load the CSV data into a Pandas DataFrame
+        df = pd.read_csv(csv_url_INRG)
+        
+        # Convert 'Date' column to datetime type if it's not already
+        df['Date'] = pd.to_datetime(df['Date'])
+        
+        # Melt the DataFrame to long format for Altair plotting
+        df_melted = df.melt(id_vars='Date', value_vars=['Capital_Positive', 'Capital_Negative', 'Capital_Daily_Investment'])
+        
+        # Create Altair chart with custom color mapping
+        chart = alt.Chart(df_melted).mark_line().encode(
+            x=alt.X('Date:T', axis=alt.Axis(format="%b %Y")),  # Custom date format here
+            y=alt.Y('value:Q', scale=alt.Scale(zero=False)),
+            color=alt.Color('variable:N', scale=alt.Scale(domain=['Capital_Positive', 'Capital_Negative', 'Capital_Daily_Investment'],
+                                                          range=['green', 'red', 'gray']))
+        ).properties(
+            title="Capital Over Time"
+        )
     
-    # Load the CSV data into a Pandas DataFrame
-    df = pd.read_csv(csv_url_INRG)
+        
+        st.altair_chart(chart, use_container_width=True)
     
-    # Convert 'Date' column to datetime type if it's not already
-    df['Date'] = pd.to_datetime(df['Date'])
+        # Calculate the difference between 'Capital_Positive' and 'Capital_Daily_Investment'
+        df['Difference_Positive_DailyInvestment'] = df['Capital_Positive'] - df['Capital_Daily_Investment']
+        
+        # Create a new DataFrame for the Difference series
+        df_diff = df[['Date', 'Difference_Positive_DailyInvestment']].copy()
+        df_diff['Date'] = pd.to_datetime(df_diff['Date'])
+        
+        # Create Altair chart for the difference
+        chart_diff = alt.Chart(df_diff).mark_line().encode(
+            x=alt.X('Date:T', axis=alt.Axis(format="%b %Y")),
+            y=alt.Y('Difference_Positive_DailyInvestment:Q', scale=alt.Scale(zero=False))
+        ).properties(
+            title="Difference between Positive and Daily Investment Strategies"
+        )
+        
+        # Display the new Altair chart
+        st.altair_chart(chart_diff, use_container_width=True)
     
-    # Melt the DataFrame to long format for Altair plotting
-    df_melted = df.melt(id_vars='Date', value_vars=['Capital_Positive', 'Capital_Negative', 'Capital_Daily_Investment'])
     
-    # Create Altair chart with custom color mapping
-    chart = alt.Chart(df_melted).mark_line().encode(
-        x=alt.X('Date:T', axis=alt.Axis(format="%b %Y")),  # Custom date format here
-        y=alt.Y('value:Q', scale=alt.Scale(zero=False)),
-        color=alt.Color('variable:N', scale=alt.Scale(domain=['Capital_Positive', 'Capital_Negative', 'Capital_Daily_Investment'],
-                                                      range=['green', 'red', 'gray']))
-    ).properties(
-        title="INRG Time Series for the 5-Day Strategy"
-    )
-
+        st.write('''We would ideally see a gradually increasingly slope in the graph showing the difference, but we can see that it is instead volatile. The positive investment strategy makes gains in April 2022 as it abstains from investing during a downturn, and the same happens in October 2022. However, between these periods the positive strategy fails to make gains as significant as investing every day. From October 2022 on, both strategies are similar.''')
+        st.write('''There is not a clear indication that the algorithm consistently overperforms the market rate.''')
     
-    st.altair_chart(chart, use_container_width=True)
-
-    # Calculate the difference between 'Capital_Positive' and 'Capital_Daily_Investment'
-    df['Difference_Positive_DailyInvestment'] = df['Capital_Positive'] - df['Capital_Daily_Investment']
     
-    # Create a new DataFrame for the Difference series
-    df_diff = df[['Date', 'Difference_Positive_DailyInvestment']].copy()
-    df_diff['Date'] = pd.to_datetime(df_diff['Date'])
-    
-    # Create Altair chart for the difference
-    chart_diff = alt.Chart(df_diff).mark_line().encode(
-        x=alt.X('Date:T', axis=alt.Axis(format="%b %Y")),
-        y=alt.Y('Difference_Positive_DailyInvestment:Q', scale=alt.Scale(zero=False))
-    ).properties(
-        title="Difference between Positive and Daily Investment Strategies"
-    )
-    
-    # Display the new Altair chart
-    st.altair_chart(chart_diff, use_container_width=True)
-
