@@ -340,7 +340,8 @@ elif page == "Can Past Performance Guide Future Prediction?":
         # Display the new Altair chart
         st.altair_chart(chart_diff, use_container_width=True)
     
-        st.write('''Evaluation here.''')
+        st.write('''In general, the difference between the positive strategy and constant strategy is increasing. There is a major decline in the difference between September 2022 and November 2022, where a significant increase in the price of GLD is not anticipated by the algorithm.''')
+        st.write('''Nevertheless, the result is promising, and shows how usually, our algorithm ourperforms the market consistently.''')
 
 
     with st.expander("VNQ 4-Day Hold", expanded=True):
@@ -390,8 +391,10 @@ elif page == "Can Past Performance Guide Future Prediction?":
         # Display the new Altair chart
         st.altair_chart(chart_diff, use_container_width=True)
 
-        st.write('''Evaluation here.''')
-    
+        st.write('''Our result here is strong, as the difference between our positive investment strategy and our constant investment strategy grows over time. It seems the main characteristic is the two are similar over period of time, before the alrogithm correctly predicts significant drops, which are avoided by the positive investment strategy.''')
+        st.write('''This is a promising result for our algorithm, as it performs well consistently in this case.
+        ''')
+
     
     
     
