@@ -221,7 +221,7 @@ if page == "Home":
         st.markdown(styled_EEM.to_html(), unsafe_allow_html=True)
         st.markdown("")
         st.markdown("<small>The algorithm performs adequately, with investing when positive beating the market rate on occasion.</small>", unsafe_allow_html=True)
-        st.markdown("<small>Despite this, returns are always negative for any of the strategies, so it seems best to ignore this ETF.</small>", unsafe_allow_html=True)
+        st.markdown("<small>Despite this, returns are almost always negative for any of the strategies, so it seems best to ignore this ETF.</small>", unsafe_allow_html=True)
         st.markdown("<small>Last updated: 11/10/23.</small>", unsafe_allow_html=True)
 
     elif selected_stock == 'XLK (Technology Fund)':
@@ -236,54 +236,6 @@ if page == "Home":
     st.markdown("")
     
     
-    #optimal_strategies.append(get_optimal_strategy(data_VUSA, 'VUSA (S&P 500)'))
-    #optimal_strategies.append(get_optimal_strategy(data_VUKE, 'VUKE (FTSE 100)'))
-    #optimal_strategies.append(get_optimal_strategy(data_INRG, 'INRG (iShares Global Clean Energy)'))
-    #optimal_strategies.append(get_optimal_strategy(data_VUKG, 'VUKG (FTSE 100 Growth)'))
-    
-    
-    #st.subheader('Choosing The Best Investment')
-    
-    #st.markdown("<small>On any given day, the algorithm might suggest several investments. We need to decide which are the most profitable to target.</small>", unsafe_allow_html=True)
-    #st.markdown("<small>We will compare out previously identified optimal strategies for each security, and compile a ranking.</small>", unsafe_allow_html=True)
-    
-    #if optimal_strategies:
-    #    result_df = pd.concat(optimal_strategies)
-        
-        # Reorder the columns
-    #    result_df = result_df[['Security', 'Daily Return with Positive Prediction Strategy', 'Capital with Positive Prediction Strategy', 'Average MAE', 'Days Holding']]
-        
-        # Convert 'Daily Return with Positive Prediction Strategy' to float for sorting
-    #    result_df.loc[:, 'Daily Return with Positive Prediction Strategy'] = result_df['Daily Return with Positive Prediction Strategy'].str.replace('%','').astype(float)
-        
-        # Sort the dataframe based on 'Daily Return with Positive Prediction Strategy' and reset the index
-    #    result_df = result_df.sort_values(by='Daily Return with Positive Prediction Strategy', ascending=False).reset_index(drop=True)
-        
-        # Create the 'Priority' column
-    #    result_df['Priority'] = result_df.index + 1
-        
-        # Move 'Priority' column to the first position
-    #    cols = result_df.columns.tolist()
-    #    cols = [cols[-1]] + cols[:-1]
-    #    result_df = result_df[cols]
-    
-        
-        # Create a styling function
-    #    def style_optimal_table(data):
-            # Apply your styling here; no background highlighting in this version
-    #        styled = data.style.set_properties(**{'width': '100px', 'text-align': 'center', 'font-size': '10pt'})\
-    #                          .set_table_styles([dict(selector='th', props=[('max-width', '80px'), 
-    #                                                                        ('text-align', 'center'), 
-    #                                                                        ('font-size', '10pt'), 
-    #                                                                        ('height', '40px')])])
-    #        return styled
-    
-        # Apply the styling function to your result_df
-    #    styled_result_df = style_optimal_table(result_df)
-        
-        # Display the styled dataframe in HTML
-    #    st.markdown(styled_result_df.to_html(), unsafe_allow_html=True)
-
 
 elif page == "Can Past Performance Guide Future Prediction?":
     st.title("Can Past Performance Guide Future Prediction?")
