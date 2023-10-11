@@ -206,7 +206,7 @@ elif page == "Can Past Performance Guide Future Prediction?":
     st.title("Can Past Performance Guide Future Prediction?")
     
     # Add descriptive text under the subheading
-    st.write('''We assume that the algorithm performance is consistent over time. In this section, we put this to the test.''')
+    st.write('''If we take the historical success as an indicator for future success with a trading strategy, it is important to evaluate if the past success was consistent. In this section, we evaluate the most successful cases in more detail.''')
     
     # URL for the INRG dataset
     csv_url_INRG = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/INRG_Predictions_Day5.csv'
