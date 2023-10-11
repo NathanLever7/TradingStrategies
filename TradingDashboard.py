@@ -209,8 +209,6 @@ elif page == "Can Past Performance Guide Future Prediction?":
     st.write('''If we take the historical success as an indicator for future success with a trading strategy, it is important to evaluate if the past success was consistent. In this section, we evaluate the most successful cases in more detail.''')
 
     st.subheader("INRG 5-Day Hold")
-    st.write('''***under subtitle***''')
-
     
     # URL for the INRG dataset
     csv_url_INRG = 'https://raw.githubusercontent.com/NathanLever7/TradingStrategies/main/INRG_Predictions_Day5.csv'
